@@ -1,4 +1,5 @@
 import React from 'react'
+import { PropTypes } from 'prop-types'
 import { AreaChart, Area, ResponsiveContainer } from 'recharts'
 
 export default function App ({ data }) {
@@ -26,4 +27,8 @@ export default function App ({ data }) {
   </AreaChart>
   </ResponsiveContainer>
   )
+}
+
+App.propTypes = {
+  data: PropTypes.array.isRequired
 }

@@ -9,11 +9,11 @@ export default function Overview () {
   const [numTransactions, setNumTransactions] = useState(0)
 
   useEffect(() => {
-    axios.get(process.env.REACT_APP_BLOCKS_LENGTH_URL).then(resp => {
+    axios.get(process.env.REACT_APP_BACKEND_URL + 'blocks/length/').then(resp => {
       setNumBlocks(resp.data.length)
     }).catch(e => console.log(e))
 
-    axios.get(process.env.REACT_APP_TRANSACTIONS_LENGTH_URL).then(resp => {
+    axios.get(process.env.REACT_APP_BACKEND_URL + 'transactions/length/').then(resp => {
       setNumTransactions(resp.data.length)
     }).catch(e => console.log(e))
   })
