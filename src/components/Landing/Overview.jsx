@@ -1,24 +1,22 @@
 import React, { useState, useEffect } from 'react'
-import {Link} from 'react-router-dom'
+import { Link } from 'react-router-dom'
 import axios from 'axios'
 
-import "./Overview.css"
+import './Overview.css'
 
-export default function Overview() {
-
+export default function Overview () {
   const [numBlocks, setNumBlocks] = useState(0)
   const [numTransactions, setNumTransactions] = useState(0)
 
   useEffect(() => {
-    axios.get('http://127.0.0.1:8000/blocks/length').then(resp => {
-        setNumBlocks(resp.data.length)
+    axios.get(process.env.REACT_APP_BLOCKS_LENGTH_URL).then(resp => {
+      setNumBlocks(resp.data.length)
     }).catch(e => console.log(e))
 
-    axios.get('http://127.0.0.1:8000/transactions/length').then(resp => {
+    axios.get(process.env.REACT_APP_TRANSACTIONS_LENGTH_URL).then(resp => {
       setNumTransactions(resp.data.length)
     }).catch(e => console.log(e))
-
-  })  
+  })
 
   return (
     <div className="chain-overview">

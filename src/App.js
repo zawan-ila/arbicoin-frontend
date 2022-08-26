@@ -1,10 +1,11 @@
-import './App.css';
-import LandingPage from './components/Landing/LandingPage';
+import React from 'react'
+import './App.css'
+import LandingPage from './components/Landing/LandingPage'
 
-function App() {
+function App () {
   return (
     <LandingPage />
-    );
+  )
 }
 
-export default App;
+export default App
