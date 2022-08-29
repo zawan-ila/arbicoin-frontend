@@ -6,6 +6,7 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom'
 import './index.css'
 import App from './App'
 import Blocks from './components/Blocks/BlocksInfo'
+import Transactions from './components/Transactions/TransactionsInfo'
 
 const root = ReactDOM.createRoot(document.getElementById('root'))
 root.render(
@@ -13,7 +14,7 @@ root.render(
     <Routes>
       <Route path="/" element={<App />} />
       <Route path="blocks" element={<Blocks />} />
-      <Route path="transactions" element={<App />} />
+      <Route path="transactions" element={<Transactions />} />
     </Routes>
   </BrowserRouter>
 )

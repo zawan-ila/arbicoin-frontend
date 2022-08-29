@@ -8,14 +8,14 @@ import { data } from '../../data/graphData'
 export default function LandingPage () {
   return (
     <>
-    <div className="graph-container">
-      <Graph data={data} />
-      <div className="logo">
-        <img src={logo} alt="logo" />
-        <span>Arbicoin<br />ABC</span>
+      <div className="graph-container">
+        <Graph data={data} />
+        <div className="logo">
+          <img src={logo} alt="logo" />
+          <span>Arbicoin<br />ABC</span>
+        </div>
       </div>
-    </div>
-    <Overview />
+      <Overview />
     </>
 
   )
