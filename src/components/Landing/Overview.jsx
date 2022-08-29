@@ -16,7 +16,7 @@ export default function Overview () {
     axios.get(process.env.REACT_APP_BACKEND_URL + 'transactions/length/').then(resp => {
       setNumTransactions(resp.data.length)
     }).catch(e => console.log(e))
-  })
+  }, [])
 
   return (
     <div className="chain-overview">
