@@ -17,21 +17,21 @@ export default function Blocks () {
 
   return (
     <>
-    <div className='title'>Blocks</div>
-    <table>
-    <thead>
-    <tr>
-      <th>Index</th>
-      <th>Time</th>
-      <th>Number of Transactions</th>
-    </tr>
-    </thead>
-    <tbody>
-    {blocksDetails.map((blockDetail, index) => {
-      return <BlockOverview key = {blockDetail.height} index={blockDetail.height} timestamp={blockDetail.timestamp} numTransactions={blockDetail.num_transactions}/>
-    })}
-    </tbody>
-    </table>
+      <div className='title'>Blocks</div>
+      <table>
+        <thead>
+          <tr>
+            <th>Index</th>
+            <th>Time</th>
+            <th>Number of Transactions</th>
+          </tr>
+        </thead>
+        <tbody>
+          {blocksDetails.map((blockDetail, index) => {
+            return <BlockOverview key = {blockDetail.height} index={blockDetail.height} timestamp={blockDetail.timestamp} numTransactions={blockDetail.num_transactions}/>
+          })}
+        </tbody>
+      </table>
     </>
 
   )
