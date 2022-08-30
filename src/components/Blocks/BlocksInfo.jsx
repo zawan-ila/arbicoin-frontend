@@ -9,7 +9,6 @@ export default function Blocks () {
   useEffect(() => {
     axios.get(process.env.REACT_APP_BACKEND_URL + 'blocks/all/').then(res => {
       setBlocksDetails(prevDetails => res.data)
-      console.log(res.data)
     }).catch(err => {
       console.log(err)
     })
