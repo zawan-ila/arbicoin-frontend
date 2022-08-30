@@ -6,7 +6,7 @@ export default function TransactionOverview ({ hash, value }) {
   return (
     <tr>
       <td><Link to={`/transactions/hash/${hash}/`} >{hash}</Link></td>
-      <td>{value}</td>
+      <td>{value} ABC</td>
     </tr>
   )
 }
