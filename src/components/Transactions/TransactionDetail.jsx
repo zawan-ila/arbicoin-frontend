@@ -4,6 +4,7 @@ import { useParams, Link } from 'react-router-dom'
 
 import Input from './Input'
 import Output from './Output'
+import '../../common.css'
 
 export default function TransactionDetail () {
   const { txhash } = useParams()
@@ -15,12 +16,20 @@ export default function TransactionDetail () {
     }).catch(err => console.log(err))
   }, [])
 
+  function InputOutputMap (arr, Element) {
+    return (
+      arr.map((data, idx) => {
+        return <Element key = {idx} data = {data} />
+      })
+    )
+  }
+
   return transactionAttributes
     ? (
       <>
         <h2>Details</h2>
-        <div style={{ display: 'flex', marginBottom: '1rem' }}>
-          <div className="headings" style={{ marginLeft: '1rem', marginRight: '2rem' }}>
+        <div className='flex-container'>
+          <div className="headings">
             <div>Hash</div>
             <div>Included in Block</div>
           </div>
@@ -32,14 +41,11 @@ export default function TransactionDetail () {
         </div>
 
         <h2>Inputs</h2>
-        {transactionAttributes.inputs.map((inp, idx) => {
-          return <Input key = {idx} data = {inp}/>
-        })}
+        {InputOutputMap(transactionAttributes.inputs, Input)}
 
         <h2>Outputs</h2>
-        {transactionAttributes.outputs.map((out, idx) => {
-          return <Output key = {idx} data = {out}/>
-        })}
+        {InputOutputMap(transactionAttributes.outputs, Output)}
+
       </>
 
       )

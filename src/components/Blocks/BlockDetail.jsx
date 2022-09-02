@@ -2,9 +2,10 @@ import React, { useEffect, useState } from 'react'
 import { useParams, Link } from 'react-router-dom'
 import axios from 'axios'
 
+import '../../common.css'
+
 export default function BlockDetail () {
   const { height } = useParams()
-  console.log('DETIL')
   const [blockAttributes, setBlockAttributes] = useState(null)
 
   useEffect(() => {
@@ -18,8 +19,8 @@ export default function BlockDetail () {
     ? (
       <>
         <h2>Details</h2>
-        <div style={{ display: 'flex', marginBottom: '1rem' }}>
-          <div className="headings" style={{ marginLeft: '1rem', marginRight: '2rem' }}>
+        <div className='flex-container'>
+          <div className="headings">
             <div>Hash</div>
             <div>Time Mined</div>
             <div>Number of Transactions</div>

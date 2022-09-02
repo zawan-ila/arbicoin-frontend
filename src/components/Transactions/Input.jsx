@@ -1,10 +1,12 @@
 import React from 'react'
 import { PropTypes } from 'prop-types'
 
+import '../../common.css'
+
 export default function Input ({ data }) {
   return (
-    <div style={{ display: 'flex', marginBottom: '1rem' }}>
-      <div className="headings" style={{ marginLeft: '1rem', marginRight: '2rem' }}>
+    <div className='flex-container'>
+      <div className="headings">
         <div>Address</div>
         <div>Value</div>
       </div>
