@@ -1,19 +1,22 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useContext } from 'react'
 import { Link } from 'react-router-dom'
-import axios from 'axios'
 
+import { UserContext } from '../User/handleUser'
 import './Overview.css'
 
 export default function Overview () {
-  const [numBlocks, setNumBlocks] = useState(0)
-  const [numTransactions, setNumTransactions] = useState(0)
+  const { myAxios } = useContext(UserContext)
+  const [numBlocks, setNumBlocks] = useState(null)
+  const [numTransactions, setNumTransactions] = useState(null)
 
   useEffect(() => {
-    axios.get(process.env.REACT_APP_BACKEND_URL + 'blocks/length/').then(resp => {
+    myAxios.get(process.env.REACT_APP_BACKEND_URL + 'blocks/length/').then(resp => {
       setNumBlocks(resp.data.length)
-    }).catch(e => console.log(e))
+    }).catch(e => {
+      console.log(e)
+    })
 
-    axios.get(process.env.REACT_APP_BACKEND_URL + 'transactions/length/').then(resp => {
+    myAxios.get(process.env.REACT_APP_BACKEND_URL + 'transactions/length/').then(resp => {
       setNumTransactions(resp.data.length)
     }).catch(e => console.log(e))
   }, [])

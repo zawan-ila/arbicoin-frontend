@@ -1,16 +1,16 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState, useContext } from 'react'
 import { useParams, Link } from 'react-router-dom'
-import axios from 'axios'
+
+import { UserContext } from '../User/handleUser'
 
 import '../../common.css'
 
 export default function BlockDetail () {
   const { height } = useParams()
   const [blockAttributes, setBlockAttributes] = useState(null)
-
+  const { myAxios } = useContext(UserContext)
   useEffect(() => {
-    axios.get(process.env.REACT_APP_BACKEND_URL + `blocks/height/${height}`).then(res => {
-      console.log(res)
+    myAxios.get(process.env.REACT_APP_BACKEND_URL + `blocks/height/${height}`).then(res => {
       setBlockAttributes(prevInfo => res.data)
     }).catch(err => console.log(err))
   }, [])

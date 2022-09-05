@@ -1,13 +1,14 @@
-import React, { useEffect, useState } from 'react'
-import axios from 'axios'
-import './TransactionsInfo.css'
+import React, { useEffect, useState, useContext } from 'react'
 import TransactionOverview from './TransactionOverview'
+import { UserContext } from '../User/handleUser'
+
+import './TransactionsInfo.css'
 
 export default function Transactions () {
   const [transactionsDetails, setTransactionsDetails] = useState([])
-
+  const { myAxios } = useContext(UserContext)
   useEffect(() => {
-    axios.get(process.env.REACT_APP_BACKEND_URL + 'transactions/all/').then(res => {
+    myAxios.get(process.env.REACT_APP_BACKEND_URL + 'transactions/all/').then(res => {
       setTransactionsDetails(prevDetails => res.data)
     }).catch(err => {
       console.log(err)
