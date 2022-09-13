@@ -1,17 +1,20 @@
-import React, { useEffect, useState } from 'react'
-import axios from 'axios'
+import React, { useEffect, useState, useContext } from 'react'
 import { useParams, Link } from 'react-router-dom'
 
 import Input from './Input'
 import Output from './Output'
+
+import { UserContext } from '../User/handleUser'
+
 import '../../common.css'
 
 export default function TransactionDetail () {
   const { txhash } = useParams()
   const [transactionAttributes, setTransactionAttributes] = useState(null)
+  const { myAxios } = useContext(UserContext)
 
   useEffect(() => {
-    axios.get(process.env.REACT_APP_BACKEND_URL + `transactions/hash/${txhash}`).then(res => {
+    myAxios.get(process.env.REACT_APP_BACKEND_URL + `transactions/hash/${txhash}`).then(res => {
       setTransactionAttributes(prevInfo => res.data)
     }).catch(err => console.log(err))
   }, [])

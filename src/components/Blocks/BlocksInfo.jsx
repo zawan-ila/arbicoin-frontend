@@ -1,13 +1,15 @@
-import React, { useEffect, useState } from 'react'
-import axios from 'axios'
-import './BlocksInfo.css'
+import React, { useEffect, useState, useContext } from 'react'
 import BlockOverview from './BlockOverview'
+
+import { UserContext } from '../User/handleUser'
+
+import './BlocksInfo.css'
 
 export default function Blocks () {
   const [blocksDetails, setBlocksDetails] = useState([])
-
+  const { myAxios } = useContext(UserContext)
   useEffect(() => {
-    axios.get(process.env.REACT_APP_BACKEND_URL + 'blocks/all/').then(res => {
+    myAxios.get(process.env.REACT_APP_BACKEND_URL + 'blocks/all/').then(res => {
       setBlocksDetails(prevDetails => res.data)
     }).catch(err => {
       console.log(err)
