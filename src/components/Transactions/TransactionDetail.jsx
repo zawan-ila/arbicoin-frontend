@@ -6,20 +6,21 @@ import Output from './Output'
 
 import { UserContext } from '../User/handleUser'
 
-import '../../common.css'
-
 export default function TransactionDetail () {
   const { txhash } = useParams()
   const [transactionAttributes, setTransactionAttributes] = useState(null)
   const { myAxios } = useContext(UserContext)
 
   useEffect(() => {
-    myAxios.get(process.env.REACT_APP_BACKEND_URL + `transactions/hash/${txhash}`).then(res => {
+    myAxios.get(process.env.REACT_APP_BACKEND_URL + `transactions/hash/${txhash}/`).then(res => {
       setTransactionAttributes(prevInfo => res.data)
     }).catch(err => console.log(err))
   }, [])
 
   function InputOutputMap (arr, Element) {
+    if (arr.length === 0) {
+      return <div className='text-2xl font-bold text-orange-300'>Coinbase!</div>
+    }
     return (
       arr.map((data, idx) => {
         return <Element key = {idx} data = {data} />
@@ -30,25 +31,25 @@ export default function TransactionDetail () {
   return transactionAttributes
     ? (
       <>
-        <h2>Details</h2>
-        <div className='flex-container'>
-          <div className="headings">
-            <div>Hash</div>
-            <div>Included in Block</div>
-          </div>
 
-          <div className="values">
-            <div>{transactionAttributes.hash}</div>
-            <div><Link to = {`/blocks/${transactionAttributes.block_num}`}>{transactionAttributes.block_num}</Link></div>
-          </div>
+        <div className='grid grid-cols-2 mx-auto mt-10 w-5/6 text-lg text-center text-gray-500'>
+          <div className='col-span-2 text-md text-gray-700 uppercase bg-blue-50 text-center'>Details</div>
+
+          <div>Hash</div>
+          <div>{transactionAttributes.hash}</div>
+
+          <div>Included in Block</div>
+          <div><Link to = {`/blocks/${transactionAttributes.block_num}`} className="mx-auto my-1 underline text-blue-400">{transactionAttributes.block_num}</Link></div>
+
         </div>
 
-        <h2>Inputs</h2>
-        {InputOutputMap(transactionAttributes.inputs, Input)}
+        <div className='w-5/6 mx-auto'>
+          <h2 className=" my-2 mx-auto text-md text-gray-700 uppercase bg-blue-50 text-center">Inputs</h2>
+          {InputOutputMap(transactionAttributes.inputs, Input)}
 
-        <h2>Outputs</h2>
-        {InputOutputMap(transactionAttributes.outputs, Output)}
-
+          <h2 className="my-2 mx-auto text-md text-gray-700 uppercase bg-blue-50 text-center">Outputs</h2>
+          {InputOutputMap(transactionAttributes.outputs, Output)}
+        </div>
       </>
 
       )

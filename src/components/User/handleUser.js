@@ -34,18 +34,23 @@ export default function UserProvider ({ children }) {
   })
 
   const handleLogin = async (username, password) => {
-    const result = await axios.post(process.env.REACT_APP_BACKEND_URL + 'auth/token/', {
-      username, password
-    })
+    try {
+      const result = await axios.post(process.env.REACT_APP_BACKEND_URL + 'auth/token/', {
+        username, password
+      })
 
-    if (result.status === 200) {
-      setUser(username)
-      setTokens(result.data)
-      localStorage.setItem('user', username)
-      localStorage.setItem('tokens', JSON.stringify(result.data))
+      if (result.status === 200) {
+        setUser(username)
+        setTokens(result.data)
+        localStorage.setItem('user', username)
+        localStorage.setItem('tokens', JSON.stringify(result.data))
+      }
+    } catch (e) {
+      console.log(e)
+      return false
     }
 
-    return result
+    return true
   }
 
   const handleLogout = () => {
@@ -56,12 +61,17 @@ export default function UserProvider ({ children }) {
   }
 
   const handleSignup = async (username, password) => {
-    const result = await axios.post(process.env.REACT_APP_BACKEND_URL + 'auth/signup/', {
-      username, password
-    })
+    let result = true
+    try {
+      const result = await axios.post(process.env.REACT_APP_BACKEND_URL + 'auth/signup/', {
+        username, password
+      })
 
-    if (result.status === 201) {
-      handleLogin(username, password)
+      if (result.status === 201) {
+        await handleLogin(username, password)
+      }
+    } catch (e) {
+      result = false
     }
 
     return result

@@ -14,7 +14,7 @@ export default function PrivateRoute ({ children }) {
   const url = location.pathname + location.search + location.hash
 
   return (
-    <Navigate to="/login" />
+    <Navigate to="/login" state={{ next: url }}/>
   )
 }
 

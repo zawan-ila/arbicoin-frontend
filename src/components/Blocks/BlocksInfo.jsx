@@ -3,8 +3,6 @@ import BlockOverview from './BlockOverview'
 
 import { UserContext } from '../User/handleUser'
 
-import './BlocksInfo.css'
-
 export default function Blocks () {
   const [blocksDetails, setBlocksDetails] = useState([])
   const { myAxios } = useContext(UserContext)
@@ -17,23 +15,28 @@ export default function Blocks () {
   }, [])
 
   return (
-    <>
-      <div className='title'>Blocks</div>
-      <table>
-        <thead>
+
+    <div className="overflow-x-auto relative">
+      <table className=" mx-auto mt-10 w-3/4 text-sm text-center text-gray-500">
+        <thead className="text-md text-gray-700 uppercase bg-blue-50">
           <tr>
-            <th>Index</th>
-            <th>Time</th>
-            <th>Number of Transactions</th>
+            <th scope="col" className="py-3 px-6">
+              Index
+            </th>
+            <th scope="col" className="py-3 px-6">
+              Time
+            </th>
+            <th scope="col" className="py-3 px-6">
+              Number of Transactions
+            </th>
           </tr>
         </thead>
         <tbody>
           {blocksDetails.map((blockDetail, index) => {
-            return <BlockOverview key = {blockDetail.height} index={blockDetail.height} timestamp={blockDetail.timestamp} numTransactions={blockDetail.num_transactions}/>
+            return <BlockOverview key = {blockDetail.height} index={blockDetail.height} timestamp={blockDetail.timestamp} numTransactions={blockDetail.num_transactions} last={index + 1 === blocksDetails.length}/>
           })}
         </tbody>
       </table>
-    </>
-
+    </div>
   )
 }

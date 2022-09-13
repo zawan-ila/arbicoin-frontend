@@ -3,44 +3,46 @@ import { useParams, Link } from 'react-router-dom'
 
 import { UserContext } from '../User/handleUser'
 
-import '../../common.css'
+// import '../../common.css'
 
 export default function BlockDetail () {
   const { height } = useParams()
   const [blockAttributes, setBlockAttributes] = useState(null)
   const { myAxios } = useContext(UserContext)
   useEffect(() => {
-    myAxios.get(process.env.REACT_APP_BACKEND_URL + `blocks/height/${height}`).then(res => {
+    myAxios.get(process.env.REACT_APP_BACKEND_URL + `blocks/height/${height}/`).then(res => {
       setBlockAttributes(prevInfo => res.data)
-    }).catch(err => console.log(err))
+    }).catch(err => console.log(err, 123))
   }, [])
 
   return blockAttributes
     ? (
       <>
-        <h2>Details</h2>
-        <div className='flex-container'>
-          <div className="headings">
-            <div>Hash</div>
-            <div>Time Mined</div>
-            <div>Number of Transactions</div>
-            <div>Merkle Root</div>
-            <div>Nonce</div>
-          </div>
+        <div className='grid grid-cols-2 mx-auto mt-10 w-3/4 text-lg text-center text-gray-500'>
 
-          <div className="values">
-            <div>{blockAttributes.hash}</div>
-            <div>{blockAttributes.timestamp.split(/[TZ.]/)[0] + ' ' + blockAttributes.timestamp.split(/[TZ.]/)[1]}</div>
-            <div>{blockAttributes.num_transactions}</div>
-            <div>{blockAttributes.merkle_hash}</div>
-            <div>{blockAttributes.nonce}</div>
-          </div>
+          <div className='col-span-2 text-md text-gray-700 uppercase bg-blue-50 text-center'>Details</div>
+
+          <div>Hash</div>
+          <div>{blockAttributes.hash}</div>
+
+          <div>Time Mined</div>
+          <div>{blockAttributes.timestamp.split(/[TZ.]/)[0] + ' ' + blockAttributes.timestamp.split(/[TZ.]/)[1]}</div>
+
+          <div>Number of Transactions</div>
+          <div>{blockAttributes.num_transactions}</div>
+
+          <div >Merkle Root</div>
+          <div>{blockAttributes.merkle_hash}</div>
+
+          <div>Nonce</div>
+          <div>{blockAttributes.nonce}</div>
+
         </div>
 
-        <h4>Block Transactions</h4>
+        <h4 className='mt-4 w-3/4 mx-auto my-4 text-md text-gray-700 uppercase bg-blue-50 text-center'>Block Transactions</h4>
         {
             blockAttributes.transactions.map((tx, idx) => {
-              return <div key={tx.hash} style = {{ marginBottom: '1rem', marginLeft: '2rem' }}><Link to={`/transactions/hash/${tx.hash}`}>{tx.hash}</Link></div>
+              return <Link key={tx.hash} to={`/transactions/hash/${tx.hash}`} className="mx-auto my-1 underline text-blue-400">{tx.hash}</Link>
             })
         }
       </>
