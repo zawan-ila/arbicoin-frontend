@@ -1,3 +1,42 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+
+@layer components {
+    .btn-primary {
+      @apply py-2 px-4 bg-blue-500 text-white font-semibold rounded-lg shadow-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-400 focus:ring-opacity-75;
+    }
+
+    .overview-component{
+        @apply hover:text-yellow-200 bg-blue-600  py-3 px-5 rounded-lg w-2/6 h-2/6
+    }
+
+    .input-output{
+        @apply flex justify-between mt-3 p-3 text-teal-500 rounded-md
+    }
+
+    .input-output-headers{
+        @apply my-2 mx-auto text-gray-700 uppercase bg-blue-50 text-center
+    }
+
+    .attr-outer{
+        @apply grid grid-cols-2 mx-auto mt-10 text-lg text-center text-gray-500
+    }
+
+    .attr-inner{
+        @apply col-span-2 text-gray-700 uppercase bg-blue-50 text-center
+    }
+
+    .nav-piece{
+        @apply block py-2 pr-4 pl-3 text-yellow-700 hover:text-yellow-900 underline rounded md:p-0 text-lg
+    }
+
+    .form-input{
+        @apply block border border-gray-50 w-full p-3 rounded mb-4
+    }
+
+    .form-submit{
+        @apply  text-center font-semibold py-3 rounded text-white focus:outline-none my-1
+    }
+}

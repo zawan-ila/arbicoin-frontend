@@ -1,71 +1,12 @@
 import React, { useContext, useState } from 'react'
 import { UserContext } from './handleUser'
 import { useNavigate } from 'react-router-dom'
+import LoginSignupForm from './LoginSignupForm'
 
-export default function Login () {
-  const [formError, setFormError] = useState(false)
-  const { handleLogin, user } = useContext(UserContext)
-  const nav = useNavigate()
-
-  const login = async (e) => {
-    e.preventDefault()
-    const u = e.target.username.value
-    const p = e.target.password.value
-
-    console.log(u, p)
-
-    const res = await handleLogin(u, p)
-    console.log(u, p)
-
-    if (!res) {
-      setFormError(true)
-    } else {
-      setFormError(false)
-    }
-  }
+export default function Signup () {
+  const { handleLogin } = useContext(UserContext)
 
   return (
-    <>
-      <div className="bg-blue-200 min-h-screen flex flex-col">
-        <div className="container max-w-sm mx-auto flex-1 flex flex-col items-center justify-center px-2">
-          <div className="bg-blue-50 px-6 py-8 rounded shadow-md text-black w-full text-center">
-            <h1 className="mb-8 text-3xl text-center">Log In</h1>
-            <span className={(formError ? '' : 'hidden ') + 'flex mb-1 items-center font-medium tracking-wide text-red-500 text-xs mt-0 ml-1'}>
-              Incorrect Credentials Entered !
-            </span>
-            <form onSubmit={login}>
-              <input
-                        required
-                        type="text"
-                        className="block border border-grey-light w-full p-3 rounded mb-4"
-                        name="username"
-                        placeholder="Username" />
-
-              <input
-                        required
-                        type="password"
-                        className="block border border-grey-light w-full p-3 rounded mb-4"
-                        name="password"
-                        placeholder="Password" />
-
-              <button
-                        type="submit"
-                        className="w-full text-center font-semibold py-3 rounded bg-green-500 text-white hover:bg-green-600 focus:outline-none my-1"
-                    >Log In</button>
-            </form>
-            <hr className='my-4'/>
-
-            <button
-                      onClick={() => nav('/signup')}
-                      type="submit"
-                      className="w-1/2 text-center font-semibold py-3 rounded bg-gray-400 text-white hover:bg-gray-500 focus:outline-none my-1"
-                  >Sign Up</button>
-
-          </div>
-
-        </div>
-      </div>
-
-    </>
+    <LoginSignupForm handleSubmit={handleLogin} errMessage={'Incorrect Credentials Entered'} isLogin={true}/>
   )
 }

@@ -32,8 +32,8 @@ export default function TransactionDetail () {
     ? (
       <>
 
-        <div className='grid grid-cols-2 mx-auto mt-10 w-5/6 text-lg text-center text-gray-500'>
-          <div className='col-span-2 text-md text-gray-700 uppercase bg-blue-50 text-center'>Details</div>
+        <div className='attr-outer w-5/6'>
+          <div className='attr-inner'>Details</div>
 
           <div>Hash</div>
           <div>{transactionAttributes.hash}</div>
@@ -44,10 +44,10 @@ export default function TransactionDetail () {
         </div>
 
         <div className='w-5/6 mx-auto'>
-          <h2 className=" my-2 mx-auto text-md text-gray-700 uppercase bg-blue-50 text-center">Inputs</h2>
+          <h2 className="input-output-headers">Inputs</h2>
           {InputOutputMap(transactionAttributes.inputs, Input)}
 
-          <h2 className="my-2 mx-auto text-md text-gray-700 uppercase bg-blue-50 text-center">Outputs</h2>
+          <h2 className="input-output-headers">Outputs</h2>
           {InputOutputMap(transactionAttributes.outputs, Output)}
         </div>
       </>

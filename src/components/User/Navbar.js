@@ -21,10 +21,17 @@ export default function Navbar () {
         <div className="justify-between items-center w-full md:flex md:w-auto ">
           <ul className="flex flex-col p-4 mt-4 rounded-lg border md:flex-row md:space-x-8 md:mt-0 md:text-sm md:font-medium md:border-0">
             <li>
-              <Link to="/blocks" className="block py-2 pr-4 pl-3 text-yellow-700 hover:text-yellow-900 underline rounded md:p-0 text-lg" >Blocks</Link>
+              <Link to="/blocks" className="nav-piece" >Blocks</Link>
             </li>
             <li>
-              <Link to="/transactions" className="block py-2 pr-4 pl-3 text-yellow-700 hover:text-yellow-900 underline rounded md:p-0 text-lg">Transactions</Link>
+              <Link to="/transactions" className="nav-piece">Transactions</Link>
+            </li>
+            <li>
+              <Link to="/wallet" className="nav-piece" >Wallet</Link>
+            </li>
+
+            <li>
+              <Link to="/new" className="nav-piece" >Send Money</Link>
             </li>
 
           </ul>

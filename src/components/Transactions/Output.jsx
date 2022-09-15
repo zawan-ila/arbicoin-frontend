@@ -3,7 +3,7 @@ import { PropTypes } from 'prop-types'
 
 export default function Output ({ data }) {
   return (
-    <div className='flex justify-between mt-3 p-3 text-teal-500 bg-purple-50 rounded-md '>
+    <div className='input-output bg-purple-50 '>
       <div className='font-bold' >
         <div>Address</div>
         <div>Value</div>

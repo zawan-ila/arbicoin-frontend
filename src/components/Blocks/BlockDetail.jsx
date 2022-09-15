@@ -3,8 +3,6 @@ import { useParams, Link } from 'react-router-dom'
 
 import { UserContext } from '../User/handleUser'
 
-// import '../../common.css'
-
 export default function BlockDetail () {
   const { height } = useParams()
   const [blockAttributes, setBlockAttributes] = useState(null)
@@ -12,15 +10,15 @@ export default function BlockDetail () {
   useEffect(() => {
     myAxios.get(process.env.REACT_APP_BACKEND_URL + `blocks/height/${height}/`).then(res => {
       setBlockAttributes(prevInfo => res.data)
-    }).catch(err => console.log(err, 123))
+    }).catch(err => console.log(err))
   }, [])
 
   return blockAttributes
     ? (
       <>
-        <div className='grid grid-cols-2 mx-auto mt-10 w-3/4 text-lg text-center text-gray-500'>
+        <div className='attr-outer w-3/4'>
 
-          <div className='col-span-2 text-md text-gray-700 uppercase bg-blue-50 text-center'>Details</div>
+          <div className='attr-inner'>Details</div>
 
           <div>Hash</div>
           <div>{blockAttributes.hash}</div>

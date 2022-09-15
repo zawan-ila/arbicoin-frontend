@@ -22,12 +22,12 @@ export default function Overview () {
 
   return (
     <div className="flex-grow flex justify-around items-center font-bold text-center mt-5 text-5xl text-yellow-400">
-      <div className='hover:text-yellow-200 bg-blue-600 py-3 px-5 rounded-lg'>
+      <div className='overview-component'>
         <span>{numBlocks}</span><br />
         <Link to="/blocks" className='underline'>Blocks</Link>
       </div>
 
-      <div className='hover:text-yellow-200 bg-blue-600 py-3 px-5 rounded-lg'>
+      <div className='overview-component'>
         <span>{numTransactions}</span><br />
         <Link to="/transactions" className='underline'>Transactions</Link>
       </div>
