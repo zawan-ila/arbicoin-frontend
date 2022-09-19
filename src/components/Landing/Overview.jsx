@@ -2,7 +2,6 @@ import React, { useState, useEffect, useContext } from 'react'
 import { Link } from 'react-router-dom'
 
 import { UserContext } from '../User/handleUser'
-import './Overview.css'
 
 export default function Overview () {
   const { myAxios } = useContext(UserContext)
@@ -22,15 +21,15 @@ export default function Overview () {
   }, [])
 
   return (
-    <div className="chain-overview">
-      <div>
+    <div className="flex-grow flex justify-around items-center font-bold text-center mt-5 text-5xl text-yellow-400">
+      <div className='overview-component'>
         <span>{numBlocks}</span><br />
-        <Link to="/blocks" className='text-link'>Blocks</Link>
+        <Link to="/blocks" className='underline'>Blocks</Link>
       </div>
 
-      <div>
+      <div className='overview-component'>
         <span>{numTransactions}</span><br />
-        <Link to="/transactions" className='text-link'>Transactions</Link>
+        <Link to="/transactions" className='underline'>Transactions</Link>
       </div>
     </div>
   )

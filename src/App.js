@@ -19,7 +19,6 @@ function App () {
   return (
     <BrowserRouter>
       <UserProvider>
-        <Navbar />
         <Routes>
 
           <Route path="/login" element={<PublicRoute><Login /></PublicRoute>} />
@@ -27,6 +26,7 @@ function App () {
 
           <Route path='*' element={
             <PrivateRoute>
+              <Navbar />
               <Routes>
                 <Route path="/" element={<LandingPage />} />
                 <Route path="blocks">
