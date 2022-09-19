@@ -1,5 +1,5 @@
 import React, { useEffect, useState, useContext } from 'react'
-import { useParams, Link } from 'react-router-dom'
+import { useParams, Link, useLocation } from 'react-router-dom'
 
 import Input from './Input'
 import Output from './Output'
@@ -7,6 +7,7 @@ import Output from './Output'
 import { UserContext } from '../User/handleUser'
 
 export default function TransactionDetail () {
+  const location = useLocation()
   const { txhash } = useParams()
   const [transactionAttributes, setTransactionAttributes] = useState(null)
   const { myAxios } = useContext(UserContext)
@@ -18,7 +19,7 @@ export default function TransactionDetail () {
   }, [])
 
   function InputOutputMap (arr, Element) {
-    if (arr.length === 0) {
+    if (arr.length === 0 && Element === Input) {
       return <div className='text-2xl font-bold text-orange-300'>Coinbase!</div>
     }
     return (
@@ -49,6 +50,7 @@ export default function TransactionDetail () {
 
           <h2 className="input-output-headers">Outputs</h2>
           {InputOutputMap(transactionAttributes.outputs, Output)}
+          {InputOutputMap(transactionAttributes.used_outputs, Output)}
         </div>
       </>
 

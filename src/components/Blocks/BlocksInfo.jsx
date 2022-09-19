@@ -2,17 +2,20 @@ import React, { useEffect, useState, useContext } from 'react'
 import BlockOverview from './BlockOverview'
 
 import { UserContext } from '../User/handleUser'
+import { useLocation } from 'react-router-dom'
 
 export default function Blocks () {
   const [blocksDetails, setBlocksDetails] = useState([])
   const { myAxios } = useContext(UserContext)
+  const location = useLocation()
+
   useEffect(() => {
     myAxios.get(process.env.REACT_APP_BACKEND_URL + 'blocks/all/').then(res => {
       setBlocksDetails(prevDetails => res.data)
     }).catch(err => {
       console.log(err)
     })
-  }, [])
+  }, [location.key])
 
   return (
 

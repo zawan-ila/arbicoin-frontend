@@ -14,10 +14,12 @@ import PrivateRoute from './components/User/PrivateRoute'
 import PublicRoute from './components/User/PublicRoute'
 
 import './App.css'
+import WalletDetail from './components/Wallet/WalletDetail'
+import TransactionPostForm from './components/Wallet/TransactionPostForm'
 
 function App () {
   return (
-    <BrowserRouter>
+    <BrowserRouter forceRefresh={true}>
       <UserProvider>
         <Routes>
 
@@ -37,6 +39,15 @@ function App () {
                   <Route index element = {<Transactions />}/>
                   <Route path="hash/:txhash" element={<TransactionDetail />} />
                 </Route>
+
+                <Route path="wallet">
+                  <Route index element = {<WalletDetail />}/>
+                </Route>
+
+                <Route path="new">
+                  <Route index element = {<TransactionPostForm />}/>
+                </Route>
+
               </Routes>
             </PrivateRoute>
           } />

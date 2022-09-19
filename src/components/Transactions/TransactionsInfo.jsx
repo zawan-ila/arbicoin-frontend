@@ -1,17 +1,20 @@
 import React, { useEffect, useState, useContext } from 'react'
 import TransactionOverview from './TransactionOverview'
 import { UserContext } from '../User/handleUser'
+import { useLocation } from 'react-router-dom'
 
 export default function Transactions () {
   const [transactionsDetails, setTransactionsDetails] = useState([])
   const { myAxios } = useContext(UserContext)
+  const location = useLocation()
+
   useEffect(() => {
     myAxios.get(process.env.REACT_APP_BACKEND_URL + 'transactions/all/').then(res => {
       setTransactionsDetails(prevDetails => res.data)
     }).catch(err => {
       console.log(err)
     })
-  }, [])
+  }, [location.key])
 
   return (
 
@@ -29,8 +32,10 @@ export default function Transactions () {
         </thead>
         <tbody>
           {transactionsDetails.map((transactionDetail, index) => {
-            const val = transactionDetail.outputs.reduce((a, b) => a + b.value, 0)
-            return <TransactionOverview key = {transactionDetail.hash} hash={transactionDetail.hash} value={val}/>
+            const valUnspent = transactionDetail.outputs.reduce((a, b) => a + b.value, 0)
+            const valSpent = transactionDetail.used_outputs.reduce((a, b) => a + b.value, 0)
+
+            return <TransactionOverview key = {transactionDetail.hash} hash={transactionDetail.hash} value={valUnspent + valSpent}/>
           })}
         </tbody>
       </table>
