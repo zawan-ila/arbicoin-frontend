@@ -1,13 +1,15 @@
 import React, { useContext } from 'react'
 import { UserContext } from './handleUser'
-import { useNavigate, Link } from 'react-router-dom'
+import { useNavigate, Link, useLocation } from 'react-router-dom'
 
 import logo from '../../assets/logo.png'
 
 export default function Navbar () {
   const navigate = useNavigate()
-
+  const location = useLocation()
   const { user, handleLogout } = useContext(UserContext)
+
+  const url = location.pathname + location.search + location.hash
 
   return (
 
@@ -26,19 +28,25 @@ export default function Navbar () {
             <li>
               <Link to="/transactions" className="nav-piece">Transactions</Link>
             </li>
-            <li>
-              <Link to="/wallet" className="nav-piece" >Wallet</Link>
-            </li>
 
-            <li>
-              <Link to="/new" className="nav-piece" >Send Money</Link>
-            </li>
+            { user
+              ? <>
+                <li>
+                  <Link to="/wallet" className="nav-piece" >My Wallet</Link>
+                </li>
+
+                <li>
+                  <Link to="/new" className="nav-piece" >Send Money</Link>
+                </li>
+              </>
+              : null
+            }
 
           </ul>
         </div>
 
         <div className="flex items-center">
-          <button onClick={handleLogout} className=" p-3 text-sm font-medium text-white bg-blue-400 hover:bg-blue-500 rounded">Logout</button>
+          <button onClick={user ? handleLogout : (e) => { navigate('/login', { state: { next: url } }) }} className=" p-3 text-sm font-medium text-white bg-blue-400 hover:bg-blue-500 rounded">{user ? 'Logout' : 'Login'}</button>
         </div>
 
       </div>

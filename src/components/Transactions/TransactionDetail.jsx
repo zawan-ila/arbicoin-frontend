@@ -39,8 +39,15 @@ export default function TransactionDetail () {
           <div>Hash</div>
           <div>{transactionAttributes.hash}</div>
 
+          <div>Time Posted</div>
+          <div>{transactionAttributes.timestamp.split(/[TZ.]/)[0] + ' ' + transactionAttributes.timestamp.split(/[TZ.]/)[1]}</div>
+
           <div>Included in Block</div>
-          <div><Link to = {`/blocks/${transactionAttributes.block_num}`} className="mx-auto my-1 underline text-blue-400">{transactionAttributes.block_num}</Link></div>
+          { transactionAttributes.block_num != null
+            ? <div><Link to = {`/blocks/${transactionAttributes.block_num}`} className="mx-auto my-1 underline text-blue-400">{transactionAttributes.block_num}</Link></div>
+            : <div className="mx-auto my-1 underline text-blue-400">{'Unmined'}</div>
+
+          }
 
         </div>
 

@@ -29,7 +29,7 @@
     }
 
     .nav-piece{
-        @apply block py-2 pr-4 pl-3 text-yellow-700 hover:text-yellow-900 underline rounded md:p-0 text-lg
+        @apply block py-2 pr-4 pl-3 text-yellow-700 hover:text-yellow-900 hover:no-underline underline rounded md:p-0 text-lg
     }
 
     .form-input{
