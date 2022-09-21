@@ -1,8 +1,9 @@
 import React, { useEffect, useState, useContext, useRef } from 'react'
-import TransactionOverview from './TransactionOverview'
-import { UserContext } from '../User/handleUser'
 import { useLocation } from 'react-router-dom'
 
+import axios from 'axios'
+
+import TransactionOverview from './TransactionOverview'
 import PaginationComponent from '../Pagination/PaginationComponent'
 
 export default function Transactions () {
@@ -14,11 +15,10 @@ export default function Transactions () {
   const nextUrl = useRef(null)
   const prevUrl = useRef(null)
 
-  const { myAxios } = useContext(UserContext)
   const location = useLocation()
 
   useEffect(() => {
-    myAxios.get(process.env.REACT_APP_BACKEND_URL + `transactions/all/?page=${currPage}`).then(res => {
+    axios.get(process.env.REACT_APP_BACKEND_URL + `transactions/all/?page=${currPage}`).then(res => {
       setTransactionsDetails(prevDetails => res.data.results)
       nextUrl.current = res.data.next
       prevUrl.current = res.data.previous

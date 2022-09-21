@@ -1,6 +1,5 @@
 import React, { useContext, useState } from 'react'
 import { UserContext } from '../User/handleUser'
-import { useNavigate } from 'react-router-dom'
 
 export default function TransactionPostForm () {
   const [formError, setFormError] = useState(null)
@@ -36,14 +35,18 @@ export default function TransactionPostForm () {
                         type="text"
                         className="form-input"
                         name="address"
-                        placeholder="Receiver Address" />
+                        placeholder="Receiver Address"
+                        onChange={e => setFormError(null)}
+                        />
 
           <input
                         required
                         type="text"
                         className="form-input"
                         name="amount"
-                        placeholder="Amount" />
+                        placeholder="Amount"
+                        onChange={e => setFormError(null)}
+                        />
 
           <button
                         type="submit"

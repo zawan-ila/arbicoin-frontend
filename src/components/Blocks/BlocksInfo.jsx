@@ -1,13 +1,14 @@
 import React, { useEffect, useState, useContext, useRef } from 'react'
-import BlockOverview from './BlockOverview'
 
-import { UserContext } from '../User/handleUser'
 import { useLocation } from 'react-router-dom'
+
+import BlockOverview from './BlockOverview'
 import PaginationComponent from '../Pagination/PaginationComponent'
+
+import axios from 'axios'
 
 export default function Blocks () {
   const [blocksDetails, setBlocksDetails] = useState(null)
-  const { myAxios } = useContext(UserContext)
   const location = useLocation()
 
   const [currPage, setCurrPage] = useState(1)
@@ -17,7 +18,7 @@ export default function Blocks () {
   const prevUrl = useRef(null)
 
   useEffect(() => {
-    myAxios.get(process.env.REACT_APP_BACKEND_URL + `blocks/all/?page=${currPage}`).then(res => {
+    axios.get(process.env.REACT_APP_BACKEND_URL + `blocks/all/?page=${currPage}`).then(res => {
       setBlocksDetails(res.data.results)
       nextUrl.current = res.data.next
       prevUrl.current = res.data.previous
