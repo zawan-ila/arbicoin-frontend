@@ -14,19 +14,24 @@ import PrivateRoute from './components/User/PrivateRoute'
 import PublicRoute from './components/User/PublicRoute'
 
 import './App.css'
+import WalletDetail from './components/Wallet/WalletDetail'
+import TransactionPostForm from './components/Wallet/TransactionPostForm'
+import WalletForeign from './components/Wallet/WalletForeign'
 
 function App () {
   return (
     <BrowserRouter>
       <UserProvider>
+
         <Routes>
 
           <Route path="/login" element={<PublicRoute><Login /></PublicRoute>} />
           <Route path="/signup" element={<PublicRoute><Signup /></PublicRoute>} />
 
           <Route path='*' element={
-            <PrivateRoute>
+            <>
               <Navbar />
+
               <Routes>
                 <Route path="/" element={<LandingPage />} />
                 <Route path="blocks">
@@ -37,8 +42,26 @@ function App () {
                   <Route index element = {<Transactions />}/>
                   <Route path="hash/:txhash" element={<TransactionDetail />} />
                 </Route>
+
+                <Route path="wallet">
+                  <Route index element = {
+                    <PrivateRoute>
+                      <WalletDetail />
+                    </PrivateRoute>
+                  }/>
+                  <Route path=":address" element={<WalletForeign />} />
+
+                </Route>
+
+                <Route path="new">
+                  <Route index element = {
+                    <PrivateRoute>
+                      <TransactionPostForm />
+                    </PrivateRoute>
+                  }/>
+                </Route>
               </Routes>
-            </PrivateRoute>
+            </>
           } />
 
         </Routes>

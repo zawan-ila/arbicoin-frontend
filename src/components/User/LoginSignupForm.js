@@ -1,7 +1,8 @@
 import React, { useContext, useState } from 'react'
-import { UserContext } from './handleUser'
 import { useNavigate } from 'react-router-dom'
 import PropTypes from 'prop-types'
+
+import { UserContext } from './handleUser'
 
 export default function LoginSignupForm ({ handleSubmit, errMessage, isLogin }) {
   const [formError, setFormError] = useState(false)
@@ -45,14 +46,18 @@ export default function LoginSignupForm ({ handleSubmit, errMessage, isLogin }) 
                         type="text"
                         className="form-input"
                         name="username"
-                        placeholder="Username" />
+                        placeholder="Username"
+                        onChange={() => setFormError(false)}
+                        />
 
               <input
                         required
                         type="password"
                         className="form-input"
                         name="password"
-                        placeholder="Password" />
+                        placeholder="Password"
+                        onChange={() => setFormError(false)}
+                        />
 
               <button
                         type="submit"

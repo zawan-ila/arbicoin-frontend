@@ -1,24 +1,24 @@
 import React, { useEffect, useState, useContext } from 'react'
-import { useParams, Link } from 'react-router-dom'
+import { useParams, Link, useLocation } from 'react-router-dom'
 
 import Input from './Input'
 import Output from './Output'
 
-import { UserContext } from '../User/handleUser'
+import axios from 'axios'
 
 export default function TransactionDetail () {
+  const location = useLocation()
   const { txhash } = useParams()
   const [transactionAttributes, setTransactionAttributes] = useState(null)
-  const { myAxios } = useContext(UserContext)
 
   useEffect(() => {
-    myAxios.get(process.env.REACT_APP_BACKEND_URL + `transactions/hash/${txhash}/`).then(res => {
+    axios.get(process.env.REACT_APP_BACKEND_URL + `transactions/hash/${txhash}/`).then(res => {
       setTransactionAttributes(prevInfo => res.data)
     }).catch(err => console.log(err))
   }, [])
 
   function InputOutputMap (arr, Element) {
-    if (arr.length === 0) {
+    if (arr.length === 0 && Element === Input) {
       return <div className='text-2xl font-bold text-orange-300'>Coinbase!</div>
     }
     return (
@@ -38,8 +38,15 @@ export default function TransactionDetail () {
           <div>Hash</div>
           <div>{transactionAttributes.hash}</div>
 
+          <div>Time Posted</div>
+          <div>{transactionAttributes.timestamp.split(/[TZ.]/)[0] + ' ' + transactionAttributes.timestamp.split(/[TZ.]/)[1]}</div>
+
           <div>Included in Block</div>
-          <div><Link to = {`/blocks/${transactionAttributes.block_num}`} className="mx-auto my-1 underline text-blue-400">{transactionAttributes.block_num}</Link></div>
+          { transactionAttributes.block_num != null
+            ? <div><Link to = {`/blocks/${transactionAttributes.block_num}`} className="mx-auto my-1 underline text-blue-400">{transactionAttributes.block_num}</Link></div>
+            : <div className="mx-auto my-1 underline text-blue-400">{'Unmined'}</div>
+
+          }
 
         </div>
 
@@ -49,6 +56,7 @@ export default function TransactionDetail () {
 
           <h2 className="input-output-headers">Outputs</h2>
           {InputOutputMap(transactionAttributes.outputs, Output)}
+          {InputOutputMap(transactionAttributes.used_outputs, Output)}
         </div>
       </>
 
