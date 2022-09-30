@@ -4,6 +4,7 @@ import { useLocation } from 'react-router-dom'
 import { UserContext } from '../User/handleUser'
 import WalletTransactions from './WalletTransactions'
 import WalletOverview from './WalletOverview'
+import Spinner from '../Spinner/Spinner'
 
 export default function WalletDetail () {
   const [walletDetails, setWalletDetails] = useState(null)
@@ -26,5 +27,5 @@ export default function WalletDetail () {
       </>
 
       )
-    : <div>Loading...</div>
+    : <Spinner />
 }

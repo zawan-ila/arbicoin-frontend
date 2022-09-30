@@ -2,6 +2,7 @@ import React, { useEffect, useState, useContext } from 'react'
 import { useParams, Link } from 'react-router-dom'
 
 import axios from 'axios'
+import Spinner from '../Spinner/Spinner'
 
 export default function BlockDetail () {
   const { height } = useParams()
@@ -46,5 +47,5 @@ export default function BlockDetail () {
       </>
 
       )
-    : <div>Loading...</div>
+    : <Spinner />
 }
