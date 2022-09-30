@@ -3,6 +3,7 @@ import { useParams } from 'react-router-dom'
 
 import { UserContext } from '../User/handleUser'
 import WalletOverview from './WalletOverview'
+import Spinner from '../Spinner/Spinner'
 
 export default function WalletForeign () {
   const [walletDetails, setWalletDetails] = useState(null)
@@ -24,5 +25,5 @@ export default function WalletForeign () {
       </>
 
       )
-    : <div>Loading...</div>
+    : <Spinner />
 }

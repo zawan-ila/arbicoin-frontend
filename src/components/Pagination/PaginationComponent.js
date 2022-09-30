@@ -5,7 +5,7 @@ export default function PaginationComponent ({ next, prev, numPages = 1, currPag
   return (
     <>
       <div className='mt-5 flex justify-center'>
-        Page {currPage} of {numPages}
+        {numPages ? `Page ${currPage} of ${numPages}` : ''}
       </div>
 
       <div className="mt-5 flex justify-center">

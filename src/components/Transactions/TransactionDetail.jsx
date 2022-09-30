@@ -3,6 +3,7 @@ import { useParams, Link, useLocation } from 'react-router-dom'
 
 import Input from './Input'
 import Output from './Output'
+import Spinner from '../Spinner/Spinner'
 
 import axios from 'axios'
 
@@ -61,5 +62,5 @@ export default function TransactionDetail () {
       </>
 
       )
-    : <div>Loading...</div>
+    : <Spinner />
 }
